@@ -7,7 +7,7 @@ class UploadForm extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {filename: '', message: ''};
+    this.state = {message: ''};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -17,7 +17,6 @@ class UploadForm extends Component {
     var fname = event.target.value;
     if (fname)
       fname = fname.replace(/^.*(\\|\/|\:)/, '')
-    this.setState({ filename: fname, message: '' });
     this.props.onChange(fname);
   }
 
@@ -62,7 +61,7 @@ class UploadForm extends Component {
               <label className="control-label col-sm-10">File Name:</label>
               <div className="form-group">
                 <div className="col-sm-12">
-                  <input id="fileSelect" type="text" className="col-sm-8 custom-border" value={this.state.filename} placeholder='Select a file' />
+                  <input id="fileSelect" type="text" className="col-sm-8 custom-border" value={this.props.fileinfo.filename} placeholder='Select a file' />
                   <label className="btn btn-primary">
                         Browse
                         <input ref="upfile" id="upfile" name="upfile" type="file" 
@@ -73,7 +72,7 @@ class UploadForm extends Component {
             </div>
             <div className="form-group">
                 <label className="control-label col-sm-10">Headers: </label>
-                <textarea className="form-control" ref="headers" name="headers" placeholder='Enter optional headers'/>
+                <textarea className="form-control" ref="headers" name="headers" value={this.props.fileinfo.headers} placeholder='Enter optional headers'/>
             </div>         
             <div className="form-group">
               <Button type="submit">
