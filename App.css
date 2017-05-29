@@ -1,0 +1,83 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40px;
+}
+
+.App-header {
+  background-color: #226;
+  height: 75px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.flex-container {
+  /* We first create a flex layout context */
+  display: flex;
+  
+  flex-flow: row wrap;
+  
+  /* Then we define how is distributed the remaining space */
+  justify-content: center;
+}
+
+.flex-label {
+  with: 100px;
+}
+
+.flex-container-vertical {
+  display: flex;
+
+  flex-flow: column;
+
+  align-items: flex-start;
+}
+
+.grid-container {
+  display: grid;
+}
+
+.grid-label {
+  width: 100px;
+}
+
+.control-label{
+    text-align: left;
+}
+
+.custom-border {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.custom-border:focus { 
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #9ecaed;
+    /* round the corners */
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+
+
+    /* make it glow! */
+    -webkit-box-shadow: 0px 0px 4px #4195fc;
+       -moz-box-shadow: 0px 0px 4px #4195fc;
+            box-shadow: 0px 0px 4px #4195fc; /* some variation of blue for the shadow */
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
