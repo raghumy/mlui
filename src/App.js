@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Button } from 'react-bootstrap';
 import FileInfo from './FileInfo';
 import LogisticRegression from './LogisticRegression';
 

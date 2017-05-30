@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Button } from 'react-bootstrap';
 
 class FileInfo extends Component {
 
@@ -22,7 +20,7 @@ class FileInfo extends Component {
     this.setState({ message: 'Uploading file' });
     var fname = event.target.value;
     if (fname)
-      fname = fname.replace(/^.*(\\|\/|\:)/, '')
+      fname = fname.replace(/^.*(\\|\/|\:)/, '');
     this.props.onFileChange(fname);
 
     fetch('http://127.0.0.1:8080/v1/upload', {
@@ -43,10 +41,6 @@ class FileInfo extends Component {
   }
 
   render() {
-    const options = {
-      baseUrl: 'http://127.0.0.1:8080/v1'
-    } 
-  
     return (
       <div className="panel panel-default">
         <div className="panel-heading">
