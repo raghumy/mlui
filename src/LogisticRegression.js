@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Button, FormControl } from 'react-bootstrap';
+import { Label, Button, Form, FormControl, FormGroup, Panel, Col, ControlLabel } from 'react-bootstrap';
 
 class LogisticRegression extends Component {
   constructor(props) {
@@ -23,8 +23,16 @@ class LogisticRegression extends Component {
 
     const formData = new FormData();
     formData.append('filename', this.props.fileinfo.filename);
-    formData.append('headers', this.props.fileinfo.headers);
+    formData.append('hasHeader', this.props.fileinfo.hasHeader != null ? this.props.fileinfo.hasHeader : false);
+    if (this.props.fileinfo.headers)
+      formData.append('headers', this.props.fileinfo.headers);
     formData.append('penalty', this.state.penalty);
+    if (this.props.fileinfo.classLabel)
+      formData.append('classLabel', this.props.fileinfo.classLabel);
+    if (this.props.fileinfo.classLabelColumn)
+      formData.append('classLabelColumn', this.props.fileinfo.classLabelColumn);
+    console.log('FormData: ' + formData);
+    
 
     var lr = this;
     fetch('http://127.0.0.1:8080/v1/logistic_regression', {
@@ -40,31 +48,44 @@ class LogisticRegression extends Component {
 
   render() {
     return (
-      <div className="panel panel-default">
-        <div className="panel-heading">
-          <h1 className="panel-title clearfix">LogisticRegression</h1>
-        </div>
-        <div>
-          <div className="form-inline">
-            <label className="control-label">Regularization:</label>
-            <FormControl componentClass="select" id="reg-select" value={this.state.penalty} onChange={this.handleChange} placeholder="select">
-              <option value="l2">l2 regularization</option>
-              <option value="l1">l1 regularization</option>
-            </FormControl>
-          </div>
-          <div className="form-group">
-            <label className="control-label">Training Accuracy:</label>
-            <label>{this.state.trainingAccuracy}</label>
-          </div>
-          <div className="form-group">
-            <label className="control-label">Testing Accuracy:</label>
-            <label>{this.state.testingAccuracy}</label>
-          </div>
-        </div>
-        <Button onClick={() => this.handleClick()}>
-        Run Regression
-        </Button>
-      </div>
+      <Panel header="Logistic Regression">
+        <Form>
+          <FormGroup controlId="formRegularization">
+            <Col sm={2}>
+              <ControlLabel>Regularization:</ControlLabel>
+            </Col>
+            <Col sm={10}>
+              <FormControl componentClass="select" 
+                value={this.state.penalty} 
+                onChange={this.handleChange} >
+                <option value="l2">l2 regularization</option>
+                <option value="l1">l1 regularization</option>
+              </FormControl>
+            </Col>
+          </FormGroup>
+          <FormGroup controlId="formLRResults">
+            <Col sm={2}>
+              <ControlLabel>Training Accuracy:</ControlLabel>
+            </Col>
+            <Col sm={2}>
+              <label>{this.state.trainingAccuracy}</label>
+            </Col>
+            <Col sm={2}>
+              <ControlLabel>Testing Accuracy:</ControlLabel>
+            </Col>
+            <Col sm={2}>
+              <label>{this.state.testingAccuracy}</label>
+            </Col>
+          </FormGroup>
+          <FormGroup>
+            <Col sm={12}>
+              <Button onClick={() => this.handleClick()}>
+                Run Regression
+              </Button>
+            </Col>
+          </FormGroup>
+        </Form>
+      </Panel>
     );
   }
 }
