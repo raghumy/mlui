@@ -68,13 +68,13 @@ class LogisticRegression extends Component {
               <ControlLabel>Training Accuracy:</ControlLabel>
             </Col>
             <Col sm={2}>
-              <label>{this.state.trainingAccuracy}</label>
+              <label className="testResult">{this.state.trainingAccuracy}</label>
             </Col>
             <Col sm={2}>
               <ControlLabel>Testing Accuracy:</ControlLabel>
             </Col>
             <Col sm={2}>
-              <label>{this.state.testingAccuracy}</label>
+              <label className="testResult">{this.state.testingAccuracy}</label>
             </Col>
           </FormGroup>
           <FormGroup>
