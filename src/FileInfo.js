@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Checkbox, Grid, Row, Col, Form, FormGroup, FormControl, ControlLabel, Panel } from 'react-bootstrap';
+import { Checkbox, Col, Form, FormGroup, FormControl, ControlLabel, Panel } from 'react-bootstrap';
 
 class FileInfo extends Component {
 
@@ -68,10 +68,6 @@ class FileInfo extends Component {
   }
 
   render() {
-    const customStyle = {
-      marginTop: 10,
-      marginBottom: 10
-    };
     return (
       <Panel header="File Info">
         <Form horizontal>

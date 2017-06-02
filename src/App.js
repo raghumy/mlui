@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import FileInfo from './FileInfo';
 import LogisticRegression from './LogisticRegression';
+import RandomForest from './RandomForest';
+import { Grid, PageHeader } from 'react-bootstrap';
 
 class App extends Component {
   constructor(props) {
@@ -57,10 +59,9 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <h2>Machine Learning</h2>
-        </div>
+      <Grid>
+        <PageHeader>Machine Learning</PageHeader>
+        
         <FileInfo fileinfo={this.state.fileinfo} 
           onHeaderChange={(h) => this.handleHeaderChange(h)} 
           onFileChange={(fname) => this.handleFileChange(fname)}
@@ -68,7 +69,8 @@ class App extends Component {
           onClassLabelChange={(h) => this.handleClassLabelChange(h)}
           onClassLabelColumnChange={(h) => this.handleClassLabelColumnChange(h)}/>
         <LogisticRegression fileinfo={this.state.fileinfo} />
-      </div>
+        <RandomForest fileinfo={this.state.fileinfo} />
+      </Grid>
     );
   }
 }

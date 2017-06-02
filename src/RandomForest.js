@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import './App.css';
 import { Button, Form, FormControl, FormGroup, Panel, Col, ControlLabel } from 'react-bootstrap';
 
-class LogisticRegression extends Component {
+class RandomForest extends Component {
   constructor(props) {
     super(props);
-    this.state = {trainingAccuracy: '', testingAccuracy: '',  penalty: 'l2'};
+    this.state = {trainingAccuracy: '', testingAccuracy: '',  n_estimators: 10};
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleEstimatorInput = this.handleEstimatorInput.bind(this);
     //this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({penalty: event.target.value})
+  handleEstimatorInput(event) {
+    this.setState({n_estimators: event.target.value})
     console.log(this.state);
   }
 
@@ -26,16 +26,16 @@ class LogisticRegression extends Component {
     formData.append('hasHeader', this.props.fileinfo.hasHeader != null ? this.props.fileinfo.hasHeader : false);
     if (this.props.fileinfo.headers)
       formData.append('headers', this.props.fileinfo.headers);
-    formData.append('penalty', this.state.penalty);
     if (this.props.fileinfo.classLabel)
       formData.append('classLabel', this.props.fileinfo.classLabel);
     if (this.props.fileinfo.classLabelColumn)
       formData.append('classLabelColumn', this.props.fileinfo.classLabelColumn);
+    formData.append('n_estimators', this.state.n_estimators);
     console.log('FormData: ' + formData);
     
 
     var lr = this;
-    fetch('http://127.0.0.1:8080/v1/logistic_regression', {
+    fetch('http://127.0.0.1:8080/v1/random_forest', {
       method: 'POST', 
       //mode: 'cors',
       body: formData, 
@@ -48,22 +48,22 @@ class LogisticRegression extends Component {
 
   render() {
     return (
-      <Panel header="Logistic Regression">
+      <Panel header="Random Forest">
         <Form>
-          <FormGroup controlId="formRegularization">
+          <FormGroup controlId="formNEstimators">
             <Col sm={2}>
-              <ControlLabel>Regularization:</ControlLabel>
+              <ControlLabel>n_estimators:</ControlLabel>
             </Col>
             <Col sm={2}>
-              <FormControl componentClass="select" 
-                value={this.state.penalty} 
-                onChange={this.handleChange} >
-                <option value="l2">l2 regularization</option>
-                <option value="l1">l1 regularization</option>
-              </FormControl>
+              <FormControl
+                type="text"
+                value={this.state.n_estimators}
+                onInput={this.handleEstimatorChange}
+                placeholder="n_estimators"
+              />
             </Col>
           </FormGroup>
-          <FormGroup controlId="formLRResults">
+          <FormGroup controlId="formRFResults">
             <Col sm={2}>
               <ControlLabel>Training Accuracy:</ControlLabel>
             </Col>
@@ -80,7 +80,7 @@ class LogisticRegression extends Component {
           <FormGroup>
             <Col sm={12}>
               <Button onClick={() => this.handleClick()}>
-                Run Logistic Regression
+                Run Random Forest
               </Button>
             </Col>
           </FormGroup>
@@ -90,4 +90,4 @@ class LogisticRegression extends Component {
   }
 }
 
-export default LogisticRegression;
+export default RandomForest;
