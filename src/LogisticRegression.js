@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import { Button, Form, FormControl, FormGroup, Panel, Col, ControlLabel } from 'react-bootstrap';
 
+/*
+Class that handles Logistic Regression
+*/
 class LogisticRegression extends Component {
   constructor(props) {
     super(props);
@@ -12,15 +15,18 @@ class LogisticRegression extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  // Handle change in penalty value
   handleChange(event) {
     this.setState({penalty: event.target.value})
     console.log(this.state);
   }
 
+  // Handle pressing the button to run Logistic Regression
   handleClick(i) {
     console.log('Regression button clicked');
     console.log(this.props.fileinfo);
 
+    // Gather form parameters
     const formData = new FormData();
     formData.append('filename', this.props.fileinfo.filename);
     formData.append('hasHeader', this.props.fileinfo.hasHeader != null ? this.props.fileinfo.hasHeader : false);
@@ -34,6 +40,9 @@ class LogisticRegression extends Component {
     console.log('FormData: ' + formData);
     
 
+    // Call the webservice to run regression
+    // On success store the accuracy results
+    // TODO: Handler error conditions
     var lr = this;
     fetch('http://127.0.0.1:8080/v1/logistic_regression', {
       method: 'POST', 

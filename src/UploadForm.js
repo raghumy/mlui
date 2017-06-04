@@ -3,6 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import { Button } from 'react-bootstrap';
 
+/*
+Deprecated
+*/
 class UploadForm extends Component {
 
   constructor(props) {

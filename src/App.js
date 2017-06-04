@@ -5,12 +5,21 @@ import LogisticRegression from './LogisticRegression';
 import RandomForest from './RandomForest';
 import { Grid, PageHeader } from 'react-bootstrap';
 
+/*
+Main application
+*/
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {fileinfo: {filename: '', headers: '', hasHeader: false, classLabel: '', classLabelColumn: ''}};
     console.log(this.state.fileinfo);
   }
+
+  /*
+  Handlers for various events
+  */
+
+  // Handler for File change
   handleFileChange(fname) {
     this.setState({ fileinfo: {
             filename: fname, 
@@ -20,6 +29,8 @@ class App extends Component {
             classLabelColumn: this.state.fileinfo.classLabelColumn
           } });
   }
+
+  // Handler for Header change
   handleHeaderChange(h) {
     this.setState({ fileinfo: { 
       filename: this.state.fileinfo.filename, 
@@ -29,6 +40,8 @@ class App extends Component {
       classLabelColumn: this.state.fileinfo.classLabelColumn
     }});
   }
+
+  // Handler for HasHeader change
   handleHasHeaderChange(h) {
     this.setState({ fileinfo: { 
       filename: this.state.fileinfo.filename, 
@@ -38,6 +51,8 @@ class App extends Component {
       classLabelColumn: this.state.fileinfo.classLabelColumn
     }});
   }
+
+  // Handler for Class Label change
   handleClassLabelChange(h) {
     this.setState({ fileinfo: { 
       filename: this.state.fileinfo.filename, 
@@ -47,6 +62,8 @@ class App extends Component {
       classLabelColumn: this.state.fileinfo.classLabelColumn
     }});
   }
+
+  // Handler for Class Label Column change
   handleClassLabelColumnChange(h) {
     this.setState({ fileinfo: { 
       filename: this.state.fileinfo.filename, 

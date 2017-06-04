@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import './App.css';
 import { Checkbox, Col, Form, FormGroup, FormControl, ControlLabel, Panel } from 'react-bootstrap';
 
+/*
+This class handles all of the File Info interaction
+The state for this component is passed in as a parameter. When an event occurs, it handles it
+and calls the appropriate handler.
+*/
 class FileInfo extends Component {
 
   constructor(props) {
@@ -15,6 +20,9 @@ class FileInfo extends Component {
     this.handleFileNameChange = this.handleFileNameChange.bind(this);
   }
 
+  /*
+  This class handles the Upload File button
+  */
   handleChange(event) {
     console.log("Handle Change")
     console.log(event.target.files[0])
@@ -23,21 +31,25 @@ class FileInfo extends Component {
     console.log('-->', formData);
 
     this.setState({ message: 'Uploading file' });
+
+    // Extract the file name and store it in the field
+    // TODO: Handle validation of file name
     var fname = event.target.value;
     if (fname)
       fname = fname.replace(/^.*(\\|\/|\:)/, '');
     this.props.onFileChange(fname);
 
+    // Call the webservice to store the file
+    // TODO: Handle errors when file upload fails
     fetch('http://127.0.0.1:8080/v1/upload', {
       method: 'POST', 
       mode: 'no-cors',
       body: formData, 
       }).then(response => {
         console.log(response);
-        this.setState({ message: 'File Uploaded' });
-        
+        this.setState({ message: 'File Uploaded' });        
       })
-        .then(json => console.log(json));  
+      .then(json => console.log(json));  
   }
 
   handleInput(event) {
