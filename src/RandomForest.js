@@ -57,8 +57,8 @@ class RandomForest extends Component {
 
   render() {
     return (
-      <Panel header="Random Forest">
-        <Form>
+      <Panel header="Random Forest" bsStyle="primary">
+        <Form horizontal>
           <FormGroup controlId="formNEstimators">
             <Col sm={2}>
               <ControlLabel>n_estimators:</ControlLabel>

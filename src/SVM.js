@@ -3,21 +3,21 @@ import './App.css';
 import { Button, Form, FormControl, FormGroup, Panel, Row, Col, ControlLabel } from 'react-bootstrap';
 
 /*
-Class that handles Logistic Regression
+Class that handles SVM
 */
-class LogisticRegression extends Component {
+class SVM extends Component {
   constructor(props) {
     super(props);
-    this.state = {trainingAccuracy: '', testingAccuracy: '',  penalty: 'l2', C: 0.1 };
+    this.state = {trainingAccuracy: '', testingAccuracy: '',  kernel: 'linear', C: 1.0 };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleCChange = this.handleCChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
-  // Handle change in penalty value
+  // Handle change in kernel value
   handleChange(event) {
-    this.setState({penalty: event.target.value})
+    this.setState({kernel: event.target.value})
     console.log(this.state);
   }
 
@@ -38,7 +38,7 @@ class LogisticRegression extends Component {
     formData.append('hasHeader', this.props.fileinfo.hasHeader != null ? this.props.fileinfo.hasHeader : false);
     if (this.props.fileinfo.headers)
       formData.append('headers', this.props.fileinfo.headers);
-    formData.append('penalty', this.state.penalty);
+    formData.append('kernel', this.state.kernel);
     if (this.state.C)
       formData.append('C', this.state.C);
     if (this.props.fileinfo.classLabel)
@@ -52,7 +52,7 @@ class LogisticRegression extends Component {
     // On success store the accuracy results
     // TODO: Handler error conditions
     var lr = this;
-    fetch('http://127.0.0.1:8080/v1/logistic_regression', {
+    fetch('http://127.0.0.1:8080/v1/svm', {
       method: 'POST', 
       //mode: 'cors',
       body: formData, 
@@ -65,18 +65,18 @@ class LogisticRegression extends Component {
 
   render() {
     return (
-      <Panel header="Logistic Regression" bsStyle="warning">
+      <Panel header="Support Vector Machine" bsStyle="info">
         <Form horizontal>
           <FormGroup controlId="formRegularization">
             <Col sm={2}>
-              <ControlLabel>Regularization:</ControlLabel>
+              <ControlLabel>Kernel:</ControlLabel>
             </Col>
             <Col sm={2}>
               <FormControl componentClass="select" 
-                value={this.state.penalty} 
+                value={this.state.kernel} 
                 onChange={this.handleChange} >
-                <option value="l2">l2 regularization</option>
-                <option value="l1">l1 regularization</option>
+                <option value="linear">linear</option>
+                <option value="rbf">rbf</option>
               </FormControl>
             </Col>
             <Col sm={2}>
@@ -108,7 +108,7 @@ class LogisticRegression extends Component {
           <FormGroup>
             <Col sm={12}>
               <Button onClick={() => this.handleClick()}>
-                Run Logistic Regression
+                Run SVM
               </Button>
             </Col>
           </FormGroup>
@@ -118,4 +118,4 @@ class LogisticRegression extends Component {
   }
 }
 
-export default LogisticRegression;
+export default SVM;

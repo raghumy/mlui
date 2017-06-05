@@ -3,6 +3,7 @@ import './App.css';
 import FileInfo from './FileInfo';
 import LogisticRegression from './LogisticRegression';
 import RandomForest from './RandomForest';
+import SVM from './SVM';
 import { Grid, PageHeader } from 'react-bootstrap';
 
 /*
@@ -87,6 +88,7 @@ class App extends Component {
           onClassLabelColumnChange={(h) => this.handleClassLabelColumnChange(h)}/>
         <LogisticRegression fileinfo={this.state.fileinfo} />
         <RandomForest fileinfo={this.state.fileinfo} />
+        <SVM fileinfo={this.state.fileinfo} />
       </Grid>
     );
   }
